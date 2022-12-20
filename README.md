@@ -11,6 +11,12 @@ ERC 721 Diamond implementation based on [EIP-2535](https://eips.ethereum.org/EIP
 - TransferFacet
 - MetadataFacet
 
+## Tests
+```bash
+forge test
+```
+Results of a sample run available in test_results.txt
+
 
 ## Acknowledgements
 These contracts were inspired by or directly modified from many sources, primarily:
