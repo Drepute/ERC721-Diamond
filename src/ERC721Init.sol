@@ -78,7 +78,7 @@ contract ERC721Init {
     function ERC721__init(string memory name_, string memory symbol_) external initializerERC721A {
          LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
         __ERC721A_init(name_, symbol_);
-        ds.supportedInterfaces[bytes4(bytes('0x7aa5391d'))] = true;
+        ds.supportedInterfaces[bytes4(0x7aa5391d)] = true;
         
     }
 
