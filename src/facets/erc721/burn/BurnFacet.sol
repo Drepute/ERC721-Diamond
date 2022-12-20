@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 * Author: Somesh Chaturvedi <somesh@drepute.xyz>, Twitter/Github: @someshc8i
 /******************************************************************************/
 
-import { LibERC721 } from  "../../../libraries/LibERC721.sol";
+import { LibERC721 } from  "../../../libraries/erc721/LibERC721.sol";
 
 contract BurnFacet {
     using LibERC721 for LibERC721.Layout;
@@ -15,6 +15,13 @@ contract BurnFacet {
     event Transfer(address indexed from, address indexed to, uint256 indexed id);
 
 
+    /*//////////////////////////////////////////////////////////////
+                        ERC721 LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    function burn(uint256 tokenId) public virtual {
+        _burn(tokenId);
+    }
 
     /*//////////////////////////////////////////////////////////////
                         INTERNAL BURN LOGIC

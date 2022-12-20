@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 * Author: Somesh Chaturvedi <somesh@drepute.xyz>, Twitter/Github: @someshc8i
 /******************************************************************************/
 
-import { LibERC721 } from  "../../../libraries/LibERC721.sol";
+import { LibERC721 } from  "../../../libraries/erc721/LibERC721.sol";
 
 contract ApproveFacet {
     using LibERC721 for LibERC721.Layout;
