@@ -75,14 +75,14 @@ contract ERC721Init {
     /*//////////////////////////////////////////////////////////////
                          ERC721 INITIALIZATION
     //////////////////////////////////////////////////////////////*/
-    function ERC721__init(string memory name_, string memory symbol_) external initializerERC721A {
+    function ERC721__init(string memory name_, string memory symbol_) external virtual initializerERC721A {
          LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
         __ERC721A_init(name_, symbol_);
         ds.supportedInterfaces[bytes4(0x7aa5391d)] = true;
         
     }
 
-    function __ERC721A_init(string memory name_, string memory symbol_) internal onlyInitializingERC721A {
+    function __ERC721A_init(string memory name_, string memory symbol_) internal virtual onlyInitializingERC721A {
         __ERC721A_init_unchained(name_, symbol_);
     }
 
