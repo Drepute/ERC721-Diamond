@@ -7,11 +7,13 @@ import {DSInvariantTest} from "../lib/solmate/src/test/utils/DSInvariantTest.sol
 
 import {ERC721, DiamondArgs} from "../src/ERC721.sol";
 import {ERC721Init} from "../src/ERC721Init.sol";
+
 import {MetadataFacet} from "../src/facets/erc721/MetadataFacet.sol";
-import {MintFacet} from "../src/facets/erc721/mint/MintFacet.sol";
-import {BurnFacet} from "../src/facets/erc721/burn/BurnFacet.sol";
-import {ApproveFacet} from "../src/facets/erc721/approve/ApproveFacet.sol";
-import {TransferFacet} from "../src/facets/erc721/transfer/TransferFacet.sol";
+import {MintFacetMock} from "../src/mocks/MintFacet.sol";
+import {BurnFacetMock} from "../src/mocks/BurnFacet.sol";
+import {ApproveFacetMock} from "../src/mocks/ApproveFacet.sol";
+import {TransferFacetMock} from "../src/mocks/TransferFacet.sol";
+
 import {DiamondCutFacet} from "../src/facets/DiamondCutFacet.sol";
 import {DiamondLoupeFacet} from "../src/facets/DiamondLoupeFacet.sol";
 
@@ -72,18 +74,18 @@ contract NonERC721Recipient {}
 contract ERC721DiamondTest is DSTestPlus {
     ERC721 token;
     MetadataFacet token__metadata;
-    MintFacet token__mint;
-    BurnFacet token__burn;
-    ApproveFacet token__approve;
-    TransferFacet token__transfer;
+    MintFacetMock token__mint;
+    BurnFacetMock token__burn;
+    ApproveFacetMock token__approve;
+    TransferFacetMock token__transfer;
 
     function _deploy(string memory _name, string memory _symbol) public returns(address) {
         MetadataFacet metadata = new MetadataFacet();
         emit log_address(address(metadata));
-        MintFacet mint = new MintFacet();
-        BurnFacet burn = new BurnFacet();
-        ApproveFacet approve = new ApproveFacet();
-        TransferFacet transfer = new TransferFacet();
+        MintFacetMock mint = new MintFacetMock();
+        BurnFacetMock burn = new BurnFacetMock();
+        ApproveFacetMock approve = new ApproveFacetMock();
+        TransferFacetMock transfer = new TransferFacetMock();
         DiamondCutFacet cut = new DiamondCutFacet();
         DiamondLoupeFacet loupe = new DiamondLoupeFacet();
         ERC721Init init = new ERC721Init();
@@ -139,10 +141,10 @@ contract ERC721DiamondTest is DSTestPlus {
         address tokenAddress = _deploy("Token", "TKN");
         token = ERC721(payable(tokenAddress));
         token__metadata = MetadataFacet(tokenAddress);
-        token__mint = MintFacet(tokenAddress);
-        token__burn = BurnFacet(tokenAddress);
-        token__approve = ApproveFacet(tokenAddress);
-        token__transfer = TransferFacet(tokenAddress);
+        token__mint = MintFacetMock(tokenAddress);
+        token__burn = BurnFacetMock(tokenAddress);
+        token__approve = ApproveFacetMock(tokenAddress);
+        token__transfer = TransferFacetMock(tokenAddress);
     }
 
     function invariantMetadata() public {
@@ -911,7 +913,7 @@ contract ERC721DiamondTest is DSTestPlus {
 }
 
 library Selector {
-    function selectors(TransferFacet c) public pure returns(bytes4[] memory) {
+    function selectors(TransferFacetMock c) public pure returns(bytes4[] memory) {
         bytes4[] memory sigs = new bytes4[](3);
         sigs[0] = bytes4(0x23b872dd);
         sigs[1] = bytes4(0x42842e0e); 
@@ -931,7 +933,7 @@ library Selector {
         return sigs;
     } 
 
-    function selectors(MintFacet c) public pure returns(bytes4[] memory) {
+    function selectors(MintFacetMock c) public pure returns(bytes4[] memory) {
         bytes4[] memory sigs = new bytes4[](3);
         sigs[0] = bytes4(0x40c10f19);
         sigs[1] = bytes4(0xa1448194); 
@@ -939,14 +941,14 @@ library Selector {
         return sigs;
     } 
 
-    function selectors(ApproveFacet c) public pure returns(bytes4[] memory) {
+    function selectors(ApproveFacetMock c) public pure returns(bytes4[] memory) {
         bytes4[] memory sigs = new bytes4[](2);
         sigs[0] = bytes4(0x095ea7b3);
         sigs[1] = bytes4(0xa22cb465); 
         return sigs;
     } 
 
-    function selectors(BurnFacet c) public pure returns(bytes4[] memory) {
+    function selectors(BurnFacetMock c) public pure returns(bytes4[] memory) {
         bytes4[] memory sigs = new bytes4[](1);
         sigs[0] = bytes4(0x42966c68);
         return sigs;

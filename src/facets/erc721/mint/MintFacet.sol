@@ -15,27 +15,6 @@ contract MintFacet {
 
     event Transfer(address indexed from, address indexed to, uint256 indexed id);
 
-
-    /*//////////////////////////////////////////////////////////////
-                        ERC721 LOGIC
-    //////////////////////////////////////////////////////////////*/
-
-    function mint(address to, uint256 tokenId) public virtual {
-        _mint(to, tokenId);
-    }
-
-    function safeMint(address to, uint256 tokenId) public virtual {
-        _safeMint(to, tokenId);
-    }
-
-    function safeMint(
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) public virtual {
-        _safeMint(to, tokenId, data);
-    }
-
     /*//////////////////////////////////////////////////////////////
                         INTERNAL MINT LOGIC
     //////////////////////////////////////////////////////////////*/
