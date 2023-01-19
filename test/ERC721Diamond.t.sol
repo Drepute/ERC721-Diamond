@@ -131,7 +131,7 @@ contract ERC721DiamondTest is DSTestPlus {
         DiamondArgs memory _args = DiamondArgs({
             owner: address(this),
             init: address(init),
-            initCalldata: abi.encodeWithSelector(bytes4(0x5b9c7303), _name, _symbol)}
+            initCalldata: abi.encodeWithSelector(bytes4(0x7029144c), _name, _symbol)}
         );
         token = new ERC721(_diamondCut, _args);
         return address(token);
