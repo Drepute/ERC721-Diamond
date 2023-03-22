@@ -27,4 +27,13 @@ contract DiamondCutFacet is IDiamondCut {
         LibDiamond.enforceIsContractOwner();
         LibDiamond.diamondCut(_diamondCut, _init, _calldata);
     }
+
+    function changeOwner(address newOwner) external {
+        LibDiamond.enforceIsContractOwner();
+        LibDiamond.setContractOwner(newOwner);
+    }
+
+    function owner() public view returns(address){
+        return LibDiamond.contractOwner();
+    }
 }
